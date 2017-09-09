@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html> <head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<!-- Meta tags that set up the page as a mobile page   -->
+<meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="apple-touch-icon" href="/m/images/iphone.png" />
+<meta name="format-detection" content="telephone=no" />
+<script type="text/javascript">
+window.scrollTo(0,1);
+</script>
+<title>Natbot's current web home</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+function speakPlease(ele) {
+    if(ele.keyCode == 13) {
+
+$(document).ready(function() {
+    $.ajax({
+        url: "https://lab.freitas.net/natbot/brain.py?yo=" + $('#entrybox').val() 
+    }).then(function(data) {
+       $('#convo').append("Natbot: ");
+       $('#convo').append(data);
+       $('#convo').append("<br/>");
+$(document).scrollTop($(document).height());
+    });
+});		
+$('#convo').append("<div class='youspoke'>You: " + $('#entrybox').val() + "</div>");
+$('#entrybox').val("");
+$(document).scrollTop($(document).height());
+    }
+}
+</script>
+<style>
+#convo
+{
+height:90%;
+width:100%;
+font-size:150%;
+}
+#entrybox
+{
+height:10%;
+border:0px;
+background-color: #ffffffff;
+color: #999999;
+font-size:150%;
+}
+.youspoke
+{
+color:#999999;
+}
+
+</style>
+<body>
+<div id="convo"></div>
+<div id="entry">
+&gt; <input type="text" id="entrybox" onkeydown="return speakPlease(event);"/>
+</div>
+
+</body>
+<script>
+ $("input:text:visible:first").focus();
+</script>
+</html>
